@@ -10,7 +10,7 @@ public class _01_IntroToStack {
 		//1. Create a Stack of Doubles
 		//   Don't forget to import the Stack class
 		
-		Stack<Double> doubles = new Stack();
+		Stack<Double> doubles = new Stack<Double>();
 		Random rand = new Random();
 		
 		//2. Use a loop to push 100 random doubles between 0 and 100 to the Stack.
