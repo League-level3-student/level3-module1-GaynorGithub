@@ -63,6 +63,28 @@ public class HangMan implements KeyListener{
 		
 	}
 	
+	void newWord() {
+		if(!words.isEmpty()) {
+			word = popWord();
+			chars = new char[word.length()];
+			rchars = new char[word.length()];
+			for (int i = 0; i < word.length(); i++) {
+				chars[i] = word.charAt(i);
+				rchars[i] = '_';
+			}
+		}
+		else {
+			int again = JOptionPane.showConfirmDialog(null, "Congratulations! You Win! Play again?");
+			if(again == 0) {
+				hang();
+				frame.repaint();
+			} else {
+				System.exit(0);
+			}
+		}
+	}
+	
+	
 	String popWord() {
 		String y = "";
 		if(!words.isEmpty()) {
@@ -104,6 +126,12 @@ public class HangMan implements KeyListener{
 				label.setText(makeStringFrom(rchars));
 			}
 		}
+		
+		if(makeStringFrom(rchars).contentEquals(makeStringFrom(chars))) {
+			newWord();
+		}
+		
+		
 	}
 
 	@Override
