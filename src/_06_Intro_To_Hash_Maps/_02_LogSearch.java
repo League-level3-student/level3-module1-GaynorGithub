@@ -1,9 +1,17 @@
 package _06_Intro_To_Hash_Maps;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
-public class _02_LogSearch {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class _02_LogSearch implements ActionListener {
   /* 
-	 * Crate a HashMap of Integers for the keys and Strings for the values.
+	 * Create a HashMap of Integers for the keys and Strings for the values.
 	 * Create a GUI with three buttons. 
 	 * Button 1: Add Entry
 	 * 				When this button is clicked, use an input dialog to ask the user to enter an ID number.
@@ -30,4 +38,90 @@ public class _02_LogSearch {
 	 *
 	 * */
 	
+	HashMap<Integer, String> ids = new HashMap<Integer, String>();
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JButton aEntry = new JButton("Add Entry");
+	JButton sID = new JButton("Search by ID");
+	JButton vList = new JButton("View List");
+	
+	
+	public static void main(String[] args) {
+		_02_LogSearch log = new _02_LogSearch();
+		log.start();
+	}
+	
+	void start() {
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(panel);
+		panel.add(aEntry);
+		panel.add(sID);
+		panel.add(vList);
+		aEntry.addActionListener(this);
+		sID.addActionListener(this);
+		vList.addActionListener(this);
+		
+		
+		
+		
+		
+		
+		frame.pack();
+	}
+	
+	void addEntry() {
+		int id = Integer.parseInt(JOptionPane.showInputDialog("Please enter an ID number"));
+		String name = JOptionPane.showInputDialog("Please enter a name");
+		ids.put(id, name);
+	}
+	
+	void searchID() {
+		int id = Integer.parseInt(JOptionPane.showInputDialog("Please enter an ID number"));
+		if(ids.containsKey(id)) {
+			JOptionPane.showMessageDialog(null, "The name that coorosponds to the entered key is: " + ids.get(id) + ".");
+		} else {
+			JOptionPane.showMessageDialog(null, "This entry does not exist.");
+		}
+		
+	}
+	
+	void viewList() {
+		if(!ids.isEmpty()) {
+			System.out.println(ids.keySet());
+			
+		}
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(aEntry)) {
+			addEntry();
+		}
+		if(e.getSource().equals(sID)) {
+			searchID();
+		}
+		if(e.getSource().equals(vList)) {
+			viewList();
+		}
+	}
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
