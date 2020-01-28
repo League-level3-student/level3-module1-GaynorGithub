@@ -39,11 +39,13 @@ public class _02_LogSearch implements ActionListener {
 	 * */
 	
 	HashMap<Integer, String> ids = new HashMap<Integer, String>();
+	String guestList = "";
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JButton aEntry = new JButton("Add Entry");
 	JButton sID = new JButton("Search by ID");
 	JButton vList = new JButton("View List");
+	JButton rEntry = new JButton("Remove Entry");
 	
 	
 	public static void main(String[] args) {
@@ -58,9 +60,11 @@ public class _02_LogSearch implements ActionListener {
 		panel.add(aEntry);
 		panel.add(sID);
 		panel.add(vList);
+		panel.add(rEntry);
 		aEntry.addActionListener(this);
 		sID.addActionListener(this);
 		vList.addActionListener(this);
+		rEntry.addActionListener(this);
 		
 		
 		
@@ -88,12 +92,32 @@ public class _02_LogSearch implements ActionListener {
 	
 	void viewList() {
 		if(!ids.isEmpty()) {
-			System.out.println(ids.keySet());
+			for (Integer key : ids.keySet()) {
+				guestList += "ID: ";
+				guestList += key;
+				guestList += " Name: ";
+				guestList += ids.get(key);
+				guestList += "\n";
+			}
+			JOptionPane.showMessageDialog(null, guestList);
+		}
+		
+	}
+	
+	void removeEntry() {
+		if(!ids.isEmpty()) {
+			int key = Integer.parseInt(JOptionPane.showInputDialog("Please enter an ID to remove"));
+			if(ids.containsKey(key)) {
+				ids.remove(key);
+			} else {
+				JOptionPane.showMessageDialog(null, "Sorry, but this ID is not on the list.");
+			}
 			
 		}
 		
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -105,6 +129,9 @@ public class _02_LogSearch implements ActionListener {
 		}
 		if(e.getSource().equals(vList)) {
 			viewList();
+		}
+		if(e.getSource().equals(rEntry)) {
+			removeEntry();
 		}
 	}
 	
